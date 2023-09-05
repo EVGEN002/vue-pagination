@@ -1,114 +1,111 @@
 <script setup>
-import { defineProps, ref, watchEffect, defineEmits } from "vue";
+import { defineProps, ref, watchEffect, defineEmits } from 'vue'
 
-import IChevronLeft from "./IChevronLeft.vue";
-import IChevronRight from "./IChevronRight.vue";
+import IChevronLeft from './IChevronLeft.vue'
+import IChevronRight from './IChevronRight.vue'
 
-const emit = defineEmits(["setPage"]);
+const emit = defineEmits(['setPage'])
 
-const start = ref(2);
-const end = ref(4);
-const firstNumber = ref(1);
-const lastNumber = ref(5);
+const start = ref(2)
+const end = ref(4)
+const firstNumber = ref(1)
+const lastNumber = ref(5)
 
 const props = defineProps({
   pages: Number,
   currentPage: Number,
-  description: String,
-});
+  description: String
+})
 
 watchEffect(() => {
   if (props.currentPage > 4 && props.currentPage < props.pages) {
-    console.log("1st condition");
-    start.value = props.currentPage - 2;
+    start.value = props.currentPage - 2
     end.value = props.currentPage
-    firstNumber.value = props.currentPage - 3;
-    lastNumber.value = props.currentPage + 1;
+    firstNumber.value = props.currentPage - 3
+    lastNumber.value = props.currentPage + 1
   } else if (
     (props.currentPage === props.pages || props.currentPage > props.pages) &&
     props.currentPage > 4
   ) {
-    console.log("2nd condition");
-    start.value = props.currentPage - 3;
-    end.value = props.currentPage - 1;
-    firstNumber.value = props.currentPage - 4;
-    lastNumber.value = props.currentPage;
+    start.value = props.currentPage - 3
+    end.value = props.currentPage - 1
+    firstNumber.value = props.currentPage - 4
+    lastNumber.value = props.currentPage
   } else {
-    console.log("3st condition");
-    start.value = 2;
-    end.value = 4;
-    firstNumber.value = 1;
-    lastNumber.value = 5;
+    start.value = 2
+    end.value = 4
+    firstNumber.value = 1
+    lastNumber.value = 5
   }
-});
+})
 
 function range(start, end) {
   if (start === end) {
-    return [start];
+    return [start]
   } else {
-    return [start, ...this.range(start + 1, end)];
+    return [start, ...this.range(start + 1, end)]
   }
 }
 
 function setPage(page) {
-  emit("setPage", page);
+  emit('setPage', page)
   if (props.scroll === true) {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
   }
 }
 
 function toStart() {
-  setPage(1);
-  start.value = 2;
-  end.value = 4;
-  firstNumber.value = 1;
-  lastNumber.value = 5;
+  setPage(1)
+  start.value = 2
+  end.value = 4
+  firstNumber.value = 1
+  lastNumber.value = 5
 }
 
 function toEnd() {
-  setPage(props.pages);
-  start.value = props.pages - 3;
-  end.value = props.pages - 1;
-  firstNumber.value = props.pages - 4;
-  lastNumber.value = props.pages;
+  setPage(props.pages)
+  start.value = props.pages - 3
+  end.value = props.pages - 1
+  firstNumber.value = props.pages - 4
+  lastNumber.value = props.pages
 }
 
 function rightOffset(page) {
   if (page === props.pages) {
-    setPage(props.pages);
+    setPage(props.pages)
   } else {
-    setPage(page);
-    start.value += 1;
-    end.value += 1;
-    firstNumber.value += 1;
-    lastNumber.value += 1;
+    setPage(page)
+    start.value += 1
+    end.value += 1
+    firstNumber.value += 1
+    lastNumber.value += 1
   }
 }
 
 function leftOffset(page) {
   if (page === 1) {
-    setPage(1);
+    setPage(1)
   } else {
-    setPage(page);
-    start.value -= 1;
-    end.value -= 1;
-    firstNumber.value -= 1;
-    lastNumber -= 1;
+    setPage(page)
+    start.value -= 1
+    end.value -= 1
+    firstNumber.value -= 1
+    lastNumber.value -= 1
   }
 }
 
 function offset(vector) {
-  if (vector === "right") {
+  if (vector === 'right') {
     if (props.currentPage > end.value - 1) {
-      rightOffset(props.currentPage + 1);
+      rightOffset(props.currentPage + 1)
     } else {
-      setPage(props.currentPage + 1);
+      setPage(props.currentPage + 1)
     }
-  } else if (vector === "left") {
+  } else if (vector === 'left') {
     if (props.currentPage < start.value + 1) {
-      leftOffset(props.currentPage - 1);
+      leftOffset(props.currentPage - 1)
     } else {
-      setPage(props.currentPage - 1);
+      setPage(props.currentPage - 1)
     }
   }
 }
@@ -135,7 +132,7 @@ function offset(vector) {
       <button
         :class="[
           { disabled: firstNumber === currentPage },
-          { active: currentPage === firstNumber },
+          { active: currentPage === firstNumber }
         ]"
         @click="leftOffset(firstNumber)"
       >
@@ -145,7 +142,7 @@ function offset(vector) {
         <button
           :class="[
             { active: currentPage === page },
-            { disabled: page > pages },
+            { disabled: page > pages }
           ]"
           v-if="page <= pages"
           @click="setPage(page)"
@@ -156,7 +153,7 @@ function offset(vector) {
       <button
         :class="[
           { disabled: lastNumber === currentPage },
-          { active: currentPage === lastNumber },
+          { active: currentPage === lastNumber }
         ]"
         v-if="lastNumber <= pages"
         @click="rightOffset(lastNumber)"
@@ -178,10 +175,6 @@ function offset(vector) {
 </template>
 
 <style scoped lang="sass">
-*
-  margin: 0
-  padding: 0
-  outline: none
 .vue-pagination
   display: flex
   align-items: center
