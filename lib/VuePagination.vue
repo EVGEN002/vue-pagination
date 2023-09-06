@@ -43,7 +43,7 @@ function range(start, end) {
   if (start === end) {
     return [start]
   } else {
-    return [start, ...this.range(start + 1, end)]
+    return [start, ...range(start + 1, end)]
   }
 }
 
