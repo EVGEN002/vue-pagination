@@ -204,4 +204,6 @@ button.icon
   color: #313c52
 button:not(.active):hover
   color: #0054a6
+button.disabled
+  color: #b1b4bb
 </style>
