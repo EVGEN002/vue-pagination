@@ -206,4 +206,5 @@ button:not(.active):hover
   color: #0054a6
 button.disabled
   color: #b1b4bb
+  pointer-events: none
 </style>
