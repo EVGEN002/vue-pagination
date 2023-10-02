@@ -1,7 +1,39 @@
-# Vue 3 + Vite
+## 🔎 Preview
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Simple Vue pagination component
 
-## Recommended IDE Setup
+<img src="https://disk.yandex.ru/i/Ef4kup5omxKySg"></img>
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## ⚙ Install
+
+```
+npm install @evgen002/vue-pagination
+```
+
+## 📄 Example
+```
+<script setup>
+import { ref, onMounted } from 'vue'
+
+import VuePagination from '../lib/VuePagination.vue'
+
+const pages = ref(99)
+const currentPage = ref(1)
+
+function setPage(page) {
+  currentPage.value = page
+}
+</script>
+
+<template>
+  <div>
+    <vue-pagination
+      :description="`Показано с 1 по ${50}`"
+      :pages="pages"
+      :current-page="currentPage"
+      :limit="50"
+      @set-page="setPage"
+    ></vue-pagination>
+  </div>
+</template>
+```
