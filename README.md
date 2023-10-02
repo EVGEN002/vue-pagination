@@ -2,7 +2,7 @@
 
 Simple Vue pagination component
 
-<img src="https://disk.yandex.ru/i/Ef4kup5omxKySg"></img>
+<img src="https://ibb.co/FBWjMmD"></img>
 
 ## ⚙ Install
 
@@ -13,9 +13,9 @@ npm install @evgen002/vue-pagination
 ## 📄 Example
 ```
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 
-import VuePagination from '../lib/VuePagination.vue'
+import VuePagination from '@evgen002/vue-pagination'
 
 const pages = ref(99)
 const currentPage = ref(1)
