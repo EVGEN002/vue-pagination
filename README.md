@@ -2,7 +2,7 @@
 
 Simple Vue pagination component
 
-<img src="https://ibb.co/FBWjMmD"></img>
+<img src="https://i.ibb.co/ZhJkPGM/image.png" alt="pagination preview"></img>
 
 ## ⚙ Install
 
